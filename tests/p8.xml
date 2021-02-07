@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Primo>
+
+ <PythonCode>
+ <![CDATA[
+def xpto(msg = 'xpto'):
+    print(msg)
+  ]]> 
+ </PythonCode>
+
+ <Parameters>
+  <Parameter name="windows_path" value="c:\windows"/>
+  <Parameter name="not_run" value="2018-08-11, 2018-08-18"/>
+  <Parameter name="days_to_run" value="tu, wed" />
+  <Parameter name="days_not_to_run" value="sun, tu" />
+  <Parameter name="hour_start" value="23:34:00"/>
+  <Parameter name="hour_finish" value="23:34:10"/>
+ </Parameters>
+
+ <Process path="{windows_path}" bin="notepad.exe">
+  <EachXSeconds interval="2" action="{xpto('EachXSeconds')}"/>
+ </Process>
+
+ <Process path="{windows_path}" bin="notepad.exe">
+  <RunningPeriod start="{hour_start}" end="{hour_finish}" />
+  <OnEvent event="after_finish" action="{ xpto('finish') }"/>
+ </Process>
+
+ <GlobalListeners>
+  <OnEvent event="after_start" action="{ xpto('start') }"/>
+ </GlobalListeners>
+
+ <!--DaysToRun e RunningPeriod - executa se estiver na primeira e no intervalo da segunda -->
+ <Process path="{windows_path}" bin="notepad.exe">
+  <DaysToRun days="{days_to_run}" />
+  <RunningPeriod start="{hour_start}" end="{hour_finish}" />
+ </Process>
+
+ <!--DaysToNotRun e RunningPeriod - se estiver na primeira não executa independente da segunda -->
+ <Process path="{windows_path}" bin="notepad.exe">
+  <DaysNotToRun days="{days_to_run}" />
+  <RunningPeriod start="{hour_start}" end="{hour_finish}" />
+ </Process>
+ 
+ <!--DaysToRun , DaysToNotRun e RunningPeriod, pertencer a primeira, não pertencer a segunda e estar no intervalo da terceira -->
+ <Process path="{windows_path}" bin="notepad.exe">
+  <DaysToRun days="{days_to_run}" />
+  <DaysNotToRun days="{days_not_to_run}" />
+  <RunningPeriod start="{hour_start}" end="{hour_finish}" />
+ </Process>
+ 
+ <!--DaysToRun e OnSpecificTime - executa se estiver na primeira e no horario da segunda -->
+ <Process path="{windows_path}" bin="notepad.exe">
+  <DaysToRun days="{days_to_run}" />
+  <OnSpecificTime time="{hour_start}" action="{process.Start()}"/>
+ </Process>
+
+ <!--DaysToRun , DaysToNotRun e OnSpecificTime - pertencer a primeira e não pertencer a segunda deve executar no horário da terceira-->
+ <Process path="{windows_path}" bin="notepad.exe">
+  <DaysToRun days="{days_to_run}" />
+  <DaysNotToRun days="{days_not_to_run}" />
+  <OnSpecificTime time="{hour_start}" action="{process.Start()}"/>
+ </Process>
+
+</Primo>

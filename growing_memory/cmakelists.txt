@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project (growing_memory)
+add_executable(growing_memory)
+target_sources(growing_memory PRIVATE growing_memory.c)
+

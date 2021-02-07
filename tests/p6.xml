@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Primo>
+
+ <Parameters>
+  <Parameter name="windows_path" value="c:\windows"/>
+  <Parameter name="not_run" value="2018-08-11, 2018-08-18"/>
+ </Parameters>
+ 
+ <Process path="{windows_path}" bin="notepad.exe">
+  <DaysToRun days="sat, sun" />
+  <DaysNotToRun days="2018-08-12, 2018-08-19" />
+ </Process>
+
+ <Process path="{windows_path}\system32" bin="calc.exe">  
+  <RunningPeriod start="15:00:00" end="22:00:00"/>
+  <DaysNotToRun days="{not_run}" />  
+ </Process>
+ 
+</Primo>

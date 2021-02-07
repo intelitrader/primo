@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Primo>
+<PythonCode>
+<![CDATA[
+def RestartOnHighMem(process):
+  from datetime import datetime, timedelta
+  now = datetime.now()
+  begin = now.replace(year = process.start_time.tm_year, month = process.start_time.tm_mon, day = process.start_time.tm_mday, hour = process.start_time.tm_hour, minute = process.start_time.tm_min, second = process.start_time.tm_sec)
+  begin = begin + timedelta(seconds = 60)
+  virtual_mb = process.memory_info.virtual_bytes / (1024*1024)
+  if now>begin and virtual_mb > 150:
+    print("SEEK AND DESTROY")
+    process.KillNow()
+    process.Start()  
+]]>  
+</PythonCode>
+ 
+ <Process bin="<caminho do processo do mal>" id="badProcess">
+  <EachXSeconds interval="1" action="{RestartOnHighMem(process);}"/>
+  <AutoStart/>
+ </Process>
+
+</Primo>

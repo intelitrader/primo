@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<Primo>
+    <Process path="c:\windows" bin="notepad.exe">
+        <RunningPeriod start="12:20:00" end="12:20:10"/>
+        <RunningPeriod start="12:20:15" end="12:20:20"/>
+        <RunningPeriod start="12:20:22" end="12:20:25"/>
+    </Process>
+</Primo>

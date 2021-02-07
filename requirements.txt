@@ -1,0 +1,2 @@
+PyInstaller==3.6
+psutil==5.7.2
